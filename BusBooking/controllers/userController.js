@@ -14,7 +14,7 @@ const addUser = async (req, res) => {
         res.status(201).json({ id: result.insertId, name, email });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Database error while adding user.' });
+        res.status(500).json({ error: 'Database error while adding user.' }); 
     }
 };
 
