@@ -30,6 +30,7 @@ const updateEntry=async (req,res)=>{
   res.status(500).send("User cannot be updated");
  }
 }
+
 const deleteEntry=async (req,res)=>{
   try {
   const {id}=req.params;
