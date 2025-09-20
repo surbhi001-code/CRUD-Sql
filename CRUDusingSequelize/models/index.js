@@ -1,14 +1,27 @@
 const Students=require('./students');
 const IdentityCard=require('./identityCard');
 const department=require('./department');
-//onr to one
+const courses=require('./courses');
+const studentCourses=require('./studentCourses');
+//one to one
+
 Students.hasOne(IdentityCard);
 IdentityCard.belongsTo(Students);
-//onetomany
+
+//one to many
+
 department.hasMany(Students);
 Students.belongsTo(department);
+
+//many to many
+ Students.belongsToMany(courses,{through:studentCourses});
+ courses.belongsToMany(Students,{through:studentCourses});
+
+
 module.exports={
     Students,
     IdentityCard,
-    department
+    department,
+    courses,
+    studentCourses
 }
