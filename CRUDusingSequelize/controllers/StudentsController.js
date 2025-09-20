@@ -1,5 +1,6 @@
 const db=require('../utils/db-connection');
 const Student=require('../models/students');
+const IdentityCard=require('../models/identityCard');
  const addEntries= async (req,res)=>{
    try{
     const { email, name } =req.body;
@@ -47,11 +48,23 @@ const deleteEntry=async (req,res)=>{
     console.log(error);
     res.send("Error encountered while deleteing");
   }
-   
-
 }
+  const addingValuesToStudentsandIdentityCard= async (req,res)=>{
+   try {
+    const student=await Student.create(req.body.students);
+    const idCard=await IdentityCard.create({
+      ...req.body.IdentityCard,
+      studentId:student.id,
+
+    });
+    res.status(201).json({student,idCard});
+   } catch (error) {
+    res.status(500).json({error:error.message});
+   }
+  }
 module.exports={
     addEntries,
     updateEntry,
-    deleteEntry
+    deleteEntry,
+    addingValuesToStudentsandIdentityCard,
 }

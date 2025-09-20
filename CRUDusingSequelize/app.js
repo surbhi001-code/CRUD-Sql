@@ -1,7 +1,7 @@
 const express=require("express");
 const db=require('./utils/db-connection');
 const studentRoute=require('./routes/StudentsRoute');
-const studentModals=require('./models/students');
+require('./models');
 const app=express();
 const PORT=3000;
 
