@@ -36,9 +36,35 @@ const getAvailableBuses = async (req, res) => {
         res.status(500).json({ error: 'Failed to retrieve available buses.' });
     }
 };
+const getBusBookings = async (req, res) => {
+    try {
+        const busId = req.params.id;
+
+        const bookings = await Booking.findAll({
+            where: { busId: busId },
+            include: [{
+                model: User,
+                attributes: ['name', 'email'] 
+            }],
+            attributes: ['id', 'seatNumber']
+        });
+
+        const formattedBookings = bookings.map(booking => ({
+            id: booking.id,
+            seatNumber: booking.seatNumber,
+            user: booking.User 
+        }));
+
+        res.status(200).json(formattedBookings);
+    } catch (error) {
+        console.error('Error fetching bus bookings:', error);
+        res.status(500).json({ error: 'Failed to retrieve bus bookings.' });
+    }
+};
 
 module.exports = {
     addBus,
     getAvailableBuses,
+    getBusBookings
 };
 

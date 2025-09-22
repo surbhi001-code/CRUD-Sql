@@ -1,4 +1,3 @@
-// models/booking.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../connection/db-connection');
 
@@ -8,10 +7,9 @@ const Booking = sequelize.define('Booking', {
     autoIncrement: true,
     primaryKey: true
   },
-  booking_date: {
-    type: DataTypes.DATE,
+  bus_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: DataTypes.NOW
   },
   seats_booked: {
     type: DataTypes.INTEGER,

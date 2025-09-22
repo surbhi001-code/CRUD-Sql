@@ -3,4 +3,6 @@ const busController=require('../controllers/busController');
 const routes=express.Router();
 routes.post('/',busController.addBus);
 routes.get('/avaliable/:seats',busController.getAvailableBuses);
+routes.get('/:id/bookings', busController.getBusBookings);
+
 module.exports=routes;
